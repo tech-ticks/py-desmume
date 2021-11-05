@@ -78,14 +78,13 @@ class BuildExt(build_ext):
         # Clone the repository - TODO: Switch to stable tar/zip download at some point.
         if not os.path.exists(path_repo):
             print("Cloning the py_desmume repository.")
-            repo = Repo.clone_from("https://github.com/SkyTemple/desmume.git", path_repo)
+            repo = Repo.clone_from("https://github.com/desmume/desmume.git", path_repo)
             repo.git.checkout("binary-interface")
 
         # Run the build script depending on the platform
         if is_windows:
             libraries = self.build_windows(path_interface)
         else:
-            # TODO: Doesn't work on Mac, I'd assume.
             libraries = self.build_linux(path_interface)
         if not libraries:
             print("Could not compile the DeSmuME library.")
